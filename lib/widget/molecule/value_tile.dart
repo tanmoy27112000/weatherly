@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ValueTile extends StatelessWidget {
   final String label;
-  final String value;
+  final double value;
   final IconData? iconData;
 
   const ValueTile(
@@ -24,7 +24,7 @@ class ValueTile extends StatelessWidget {
           height: 15,
         ),
         Text(
-          value,
+          (value - 273.15).toStringAsFixed(1) + '°C',
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,

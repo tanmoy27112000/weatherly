@@ -25,10 +25,25 @@ abstract class OneCallWeather with _$OneCallWeather {
     required List<Minutely> minutely,
     required List<Current> hourly,
     required List<Daily> daily,
+    required List<Alert>? alerts,
   }) = _OneCallWeather;
 
   factory OneCallWeather.fromJson(Map<String, dynamic> json) =>
       _$OneCallWeatherFromJson(json);
+}
+
+@freezed
+abstract class Alert with _$Alert {
+  const factory Alert({
+    required String sender_name,
+    required String event,
+    required int start,
+    required int end,
+    required String description,
+    required List<String> tags,
+  }) = _Alert;
+
+  factory Alert.fromJson(Map<String, dynamic> json) => _$AlertFromJson(json);
 }
 
 @freezed
@@ -49,7 +64,7 @@ abstract class Current with _$Current {
     required int wind_deg,
     required double wind_gust,
     required List<Weather> weather,
-    int? pop,
+    double? pop,
   }) = _Current;
 
   factory Current.fromJson(Map<String, dynamic> json) =>
@@ -127,7 +142,7 @@ abstract class Temp with _$Temp {
 abstract class Minutely with _$Minutely {
   const factory Minutely({
     required int dt,
-    required int precipitation,
+    required double precipitation,
   }) = _Minutely;
 
   factory Minutely.fromJson(Map<String, dynamic> json) =>

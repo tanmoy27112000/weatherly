@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:weatherly/controller/weather_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weatherly/bloc/weather_bloc.dart';
 import 'package:weatherly/util/date_formatter.dart';
 
-AppBar customAppbar() {
+AppBar customAppbar(WeatherBloc weatherBloc) {
   return AppBar(
     elevation: 0,
+    centerTitle: true,
     backgroundColor: Colors.transparent,
     title: Text(
       DateFormatter.eeeedMMMMyyyy(DateTime.now()),
@@ -14,12 +15,15 @@ AppBar customAppbar() {
       ),
     ),
     actions: [
-      Consumer<WeatherController>(
-        builder: (context, myType, child) {
+      BlocBuilder<WeatherBloc, WeatherState>(
+        bloc: weatherBloc,
+        builder: (context, state) {
           return IconButton(
             icon: const Icon(Icons.gps_fixed),
             onPressed: () {
-              myType.getCurrentLocationData();
+              weatherBloc.add(
+                const WeatherEvent.getWeatherByLocation(),
+              );
             },
           );
         },

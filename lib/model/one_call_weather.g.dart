@@ -22,6 +22,9 @@ _$_OneCallWeather _$$_OneCallWeatherFromJson(Map<String, dynamic> json) =>
       daily: (json['daily'] as List<dynamic>)
           .map((e) => Daily.fromJson(e as Map<String, dynamic>))
           .toList(),
+      alerts: (json['alerts'] as List<dynamic>?)
+          ?.map((e) => Alert.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_OneCallWeatherToJson(_$_OneCallWeather instance) =>
@@ -34,6 +37,25 @@ Map<String, dynamic> _$$_OneCallWeatherToJson(_$_OneCallWeather instance) =>
       'minutely': instance.minutely,
       'hourly': instance.hourly,
       'daily': instance.daily,
+      'alerts': instance.alerts,
+    };
+
+_$_Alert _$$_AlertFromJson(Map<String, dynamic> json) => _$_Alert(
+      sender_name: json['sender_name'] as String,
+      event: json['event'] as String,
+      start: json['start'] as int,
+      end: json['end'] as int,
+      description: json['description'] as String,
+      tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$$_AlertToJson(_$_Alert instance) => <String, dynamic>{
+      'sender_name': instance.sender_name,
+      'event': instance.event,
+      'start': instance.start,
+      'end': instance.end,
+      'description': instance.description,
+      'tags': instance.tags,
     };
 
 _$_Current _$$_CurrentFromJson(Map<String, dynamic> json) => _$_Current(
@@ -54,7 +76,7 @@ _$_Current _$$_CurrentFromJson(Map<String, dynamic> json) => _$_Current(
       weather: (json['weather'] as List<dynamic>)
           .map((e) => Weather.fromJson(e as Map<String, dynamic>))
           .toList(),
-      pop: json['pop'] as int?,
+      pop: (json['pop'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$_CurrentToJson(_$_Current instance) =>
@@ -174,7 +196,7 @@ Map<String, dynamic> _$$_TempToJson(_$_Temp instance) => <String, dynamic>{
 
 _$_Minutely _$$_MinutelyFromJson(Map<String, dynamic> json) => _$_Minutely(
       dt: json['dt'] as int,
-      precipitation: json['precipitation'] as int,
+      precipitation: (json['precipitation'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$_MinutelyToJson(_$_Minutely instance) =>

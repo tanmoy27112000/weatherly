@@ -33,10 +33,15 @@ class ForecastRowWidget extends StatelessWidget {
         itemCount: weathers.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10.0,
+            ),
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
+                border: Border.all(
+                  color: Colors.grey.shade600,
+                  width: 2,
+                ),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Padding(
@@ -45,19 +50,18 @@ class ForecastRowWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Text(
-                      DateFormatter.eha(
-                        DateTime.fromMillisecondsSinceEpoch(
-                            weathers[index].date * 1000),
-                      ),
+                      DateFormatter.eha(weathers[index].date),
                     ),
                     SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: LottieBuilder.asset(
-                              getIconData(weathers[index].icon)),
-                        )),
+                      height: 100,
+                      width: 100,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: LottieBuilder.asset(
+                          getIconData(weathers[index].icon),
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       width: 20.w,
                       child: Center(

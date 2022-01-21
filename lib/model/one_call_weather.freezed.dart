@@ -30,7 +30,8 @@ class _$OneCallWeatherTearOff {
       required Current current,
       required List<Minutely> minutely,
       required List<Current> hourly,
-      required List<Daily> daily}) {
+      required List<Daily> daily,
+      required List<Alert>? alerts}) {
     return _OneCallWeather(
       lat: lat,
       lon: lon,
@@ -40,6 +41,7 @@ class _$OneCallWeatherTearOff {
       minutely: minutely,
       hourly: hourly,
       daily: daily,
+      alerts: alerts,
     );
   }
 
@@ -61,6 +63,7 @@ mixin _$OneCallWeather {
   List<Minutely> get minutely => throw _privateConstructorUsedError;
   List<Current> get hourly => throw _privateConstructorUsedError;
   List<Daily> get daily => throw _privateConstructorUsedError;
+  List<Alert>? get alerts => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -81,7 +84,8 @@ abstract class $OneCallWeatherCopyWith<$Res> {
       Current current,
       List<Minutely> minutely,
       List<Current> hourly,
-      List<Daily> daily});
+      List<Daily> daily,
+      List<Alert>? alerts});
 
   $CurrentCopyWith<$Res> get current;
 }
@@ -105,6 +109,7 @@ class _$OneCallWeatherCopyWithImpl<$Res>
     Object? minutely = freezed,
     Object? hourly = freezed,
     Object? daily = freezed,
+    Object? alerts = freezed,
   }) {
     return _then(_value.copyWith(
       lat: lat == freezed
@@ -139,6 +144,10 @@ class _$OneCallWeatherCopyWithImpl<$Res>
           ? _value.daily
           : daily // ignore: cast_nullable_to_non_nullable
               as List<Daily>,
+      alerts: alerts == freezed
+          ? _value.alerts
+          : alerts // ignore: cast_nullable_to_non_nullable
+              as List<Alert>?,
     ));
   }
 
@@ -165,7 +174,8 @@ abstract class _$OneCallWeatherCopyWith<$Res>
       Current current,
       List<Minutely> minutely,
       List<Current> hourly,
-      List<Daily> daily});
+      List<Daily> daily,
+      List<Alert>? alerts});
 
   @override
   $CurrentCopyWith<$Res> get current;
@@ -192,6 +202,7 @@ class __$OneCallWeatherCopyWithImpl<$Res>
     Object? minutely = freezed,
     Object? hourly = freezed,
     Object? daily = freezed,
+    Object? alerts = freezed,
   }) {
     return _then(_OneCallWeather(
       lat: lat == freezed
@@ -226,6 +237,10 @@ class __$OneCallWeatherCopyWithImpl<$Res>
           ? _value.daily
           : daily // ignore: cast_nullable_to_non_nullable
               as List<Daily>,
+      alerts: alerts == freezed
+          ? _value.alerts
+          : alerts // ignore: cast_nullable_to_non_nullable
+              as List<Alert>?,
     ));
   }
 }
@@ -241,7 +256,8 @@ class _$_OneCallWeather implements _OneCallWeather {
       required this.current,
       required this.minutely,
       required this.hourly,
-      required this.daily});
+      required this.daily,
+      required this.alerts});
 
   factory _$_OneCallWeather.fromJson(Map<String, dynamic> json) =>
       _$$_OneCallWeatherFromJson(json);
@@ -262,10 +278,12 @@ class _$_OneCallWeather implements _OneCallWeather {
   final List<Current> hourly;
   @override
   final List<Daily> daily;
+  @override
+  final List<Alert>? alerts;
 
   @override
   String toString() {
-    return 'OneCallWeather(lat: $lat, lon: $lon, timezone: $timezone, timezone_offset: $timezone_offset, current: $current, minutely: $minutely, hourly: $hourly, daily: $daily)';
+    return 'OneCallWeather(lat: $lat, lon: $lon, timezone: $timezone, timezone_offset: $timezone_offset, current: $current, minutely: $minutely, hourly: $hourly, daily: $daily, alerts: $alerts)';
   }
 
   @override
@@ -281,7 +299,8 @@ class _$_OneCallWeather implements _OneCallWeather {
             const DeepCollectionEquality().equals(other.current, current) &&
             const DeepCollectionEquality().equals(other.minutely, minutely) &&
             const DeepCollectionEquality().equals(other.hourly, hourly) &&
-            const DeepCollectionEquality().equals(other.daily, daily));
+            const DeepCollectionEquality().equals(other.daily, daily) &&
+            const DeepCollectionEquality().equals(other.alerts, alerts));
   }
 
   @override
@@ -294,7 +313,8 @@ class _$_OneCallWeather implements _OneCallWeather {
       const DeepCollectionEquality().hash(current),
       const DeepCollectionEquality().hash(minutely),
       const DeepCollectionEquality().hash(hourly),
-      const DeepCollectionEquality().hash(daily));
+      const DeepCollectionEquality().hash(daily),
+      const DeepCollectionEquality().hash(alerts));
 
   @JsonKey(ignore: true)
   @override
@@ -316,7 +336,8 @@ abstract class _OneCallWeather implements OneCallWeather {
       required Current current,
       required List<Minutely> minutely,
       required List<Current> hourly,
-      required List<Daily> daily}) = _$_OneCallWeather;
+      required List<Daily> daily,
+      required List<Alert>? alerts}) = _$_OneCallWeather;
 
   factory _OneCallWeather.fromJson(Map<String, dynamic> json) =
       _$_OneCallWeather.fromJson;
@@ -338,9 +359,274 @@ abstract class _OneCallWeather implements OneCallWeather {
   @override
   List<Daily> get daily;
   @override
+  List<Alert>? get alerts;
+  @override
   @JsonKey(ignore: true)
   _$OneCallWeatherCopyWith<_OneCallWeather> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+Alert _$AlertFromJson(Map<String, dynamic> json) {
+  return _Alert.fromJson(json);
+}
+
+/// @nodoc
+class _$AlertTearOff {
+  const _$AlertTearOff();
+
+  _Alert call(
+      {required String sender_name,
+      required String event,
+      required int start,
+      required int end,
+      required String description,
+      required List<String> tags}) {
+    return _Alert(
+      sender_name: sender_name,
+      event: event,
+      start: start,
+      end: end,
+      description: description,
+      tags: tags,
+    );
+  }
+
+  Alert fromJson(Map<String, Object?> json) {
+    return Alert.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Alert = _$AlertTearOff();
+
+/// @nodoc
+mixin _$Alert {
+  String get sender_name => throw _privateConstructorUsedError;
+  String get event => throw _privateConstructorUsedError;
+  int get start => throw _privateConstructorUsedError;
+  int get end => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  List<String> get tags => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AlertCopyWith<Alert> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AlertCopyWith<$Res> {
+  factory $AlertCopyWith(Alert value, $Res Function(Alert) then) =
+      _$AlertCopyWithImpl<$Res>;
+  $Res call(
+      {String sender_name,
+      String event,
+      int start,
+      int end,
+      String description,
+      List<String> tags});
+}
+
+/// @nodoc
+class _$AlertCopyWithImpl<$Res> implements $AlertCopyWith<$Res> {
+  _$AlertCopyWithImpl(this._value, this._then);
+
+  final Alert _value;
+  // ignore: unused_field
+  final $Res Function(Alert) _then;
+
+  @override
+  $Res call({
+    Object? sender_name = freezed,
+    Object? event = freezed,
+    Object? start = freezed,
+    Object? end = freezed,
+    Object? description = freezed,
+    Object? tags = freezed,
+  }) {
+    return _then(_value.copyWith(
+      sender_name: sender_name == freezed
+          ? _value.sender_name
+          : sender_name // ignore: cast_nullable_to_non_nullable
+              as String,
+      event: event == freezed
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as String,
+      start: start == freezed
+          ? _value.start
+          : start // ignore: cast_nullable_to_non_nullable
+              as int,
+      end: end == freezed
+          ? _value.end
+          : end // ignore: cast_nullable_to_non_nullable
+              as int,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$AlertCopyWith<$Res> implements $AlertCopyWith<$Res> {
+  factory _$AlertCopyWith(_Alert value, $Res Function(_Alert) then) =
+      __$AlertCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String sender_name,
+      String event,
+      int start,
+      int end,
+      String description,
+      List<String> tags});
+}
+
+/// @nodoc
+class __$AlertCopyWithImpl<$Res> extends _$AlertCopyWithImpl<$Res>
+    implements _$AlertCopyWith<$Res> {
+  __$AlertCopyWithImpl(_Alert _value, $Res Function(_Alert) _then)
+      : super(_value, (v) => _then(v as _Alert));
+
+  @override
+  _Alert get _value => super._value as _Alert;
+
+  @override
+  $Res call({
+    Object? sender_name = freezed,
+    Object? event = freezed,
+    Object? start = freezed,
+    Object? end = freezed,
+    Object? description = freezed,
+    Object? tags = freezed,
+  }) {
+    return _then(_Alert(
+      sender_name: sender_name == freezed
+          ? _value.sender_name
+          : sender_name // ignore: cast_nullable_to_non_nullable
+              as String,
+      event: event == freezed
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as String,
+      start: start == freezed
+          ? _value.start
+          : start // ignore: cast_nullable_to_non_nullable
+              as int,
+      end: end == freezed
+          ? _value.end
+          : end // ignore: cast_nullable_to_non_nullable
+              as int,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Alert implements _Alert {
+  const _$_Alert(
+      {required this.sender_name,
+      required this.event,
+      required this.start,
+      required this.end,
+      required this.description,
+      required this.tags});
+
+  factory _$_Alert.fromJson(Map<String, dynamic> json) =>
+      _$$_AlertFromJson(json);
+
+  @override
+  final String sender_name;
+  @override
+  final String event;
+  @override
+  final int start;
+  @override
+  final int end;
+  @override
+  final String description;
+  @override
+  final List<String> tags;
+
+  @override
+  String toString() {
+    return 'Alert(sender_name: $sender_name, event: $event, start: $start, end: $end, description: $description, tags: $tags)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Alert &&
+            const DeepCollectionEquality()
+                .equals(other.sender_name, sender_name) &&
+            const DeepCollectionEquality().equals(other.event, event) &&
+            const DeepCollectionEquality().equals(other.start, start) &&
+            const DeepCollectionEquality().equals(other.end, end) &&
+            const DeepCollectionEquality()
+                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.tags, tags));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(sender_name),
+      const DeepCollectionEquality().hash(event),
+      const DeepCollectionEquality().hash(start),
+      const DeepCollectionEquality().hash(end),
+      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(tags));
+
+  @JsonKey(ignore: true)
+  @override
+  _$AlertCopyWith<_Alert> get copyWith =>
+      __$AlertCopyWithImpl<_Alert>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_AlertToJson(this);
+  }
+}
+
+abstract class _Alert implements Alert {
+  const factory _Alert(
+      {required String sender_name,
+      required String event,
+      required int start,
+      required int end,
+      required String description,
+      required List<String> tags}) = _$_Alert;
+
+  factory _Alert.fromJson(Map<String, dynamic> json) = _$_Alert.fromJson;
+
+  @override
+  String get sender_name;
+  @override
+  String get event;
+  @override
+  int get start;
+  @override
+  int get end;
+  @override
+  String get description;
+  @override
+  List<String> get tags;
+  @override
+  @JsonKey(ignore: true)
+  _$AlertCopyWith<_Alert> get copyWith => throw _privateConstructorUsedError;
 }
 
 Current _$CurrentFromJson(Map<String, dynamic> json) {
@@ -367,7 +653,7 @@ class _$CurrentTearOff {
       required int wind_deg,
       required double wind_gust,
       required List<Weather> weather,
-      int? pop}) {
+      double? pop}) {
     return _Current(
       dt: dt,
       sunrise: sunrise,
@@ -413,7 +699,7 @@ mixin _$Current {
   int get wind_deg => throw _privateConstructorUsedError;
   double get wind_gust => throw _privateConstructorUsedError;
   List<Weather> get weather => throw _privateConstructorUsedError;
-  int? get pop => throw _privateConstructorUsedError;
+  double? get pop => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -440,7 +726,7 @@ abstract class $CurrentCopyWith<$Res> {
       int wind_deg,
       double wind_gust,
       List<Weather> weather,
-      int? pop});
+      double? pop});
 }
 
 /// @nodoc
@@ -534,7 +820,7 @@ class _$CurrentCopyWithImpl<$Res> implements $CurrentCopyWith<$Res> {
       pop: pop == freezed
           ? _value.pop
           : pop // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
     ));
   }
 }
@@ -560,7 +846,7 @@ abstract class _$CurrentCopyWith<$Res> implements $CurrentCopyWith<$Res> {
       int wind_deg,
       double wind_gust,
       List<Weather> weather,
-      int? pop});
+      double? pop});
 }
 
 /// @nodoc
@@ -655,7 +941,7 @@ class __$CurrentCopyWithImpl<$Res> extends _$CurrentCopyWithImpl<$Res>
       pop: pop == freezed
           ? _value.pop
           : pop // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
     ));
   }
 }
@@ -715,7 +1001,7 @@ class _$_Current implements _Current {
   @override
   final List<Weather> weather;
   @override
-  final int? pop;
+  final double? pop;
 
   @override
   String toString() {
@@ -796,7 +1082,7 @@ abstract class _Current implements Current {
       required int wind_deg,
       required double wind_gust,
       required List<Weather> weather,
-      int? pop}) = _$_Current;
+      double? pop}) = _$_Current;
 
   factory _Current.fromJson(Map<String, dynamic> json) = _$_Current.fromJson;
 
@@ -831,7 +1117,7 @@ abstract class _Current implements Current {
   @override
   List<Weather> get weather;
   @override
-  int? get pop;
+  double? get pop;
   @override
   @JsonKey(ignore: true)
   _$CurrentCopyWith<_Current> get copyWith =>
@@ -2112,7 +2398,7 @@ Minutely _$MinutelyFromJson(Map<String, dynamic> json) {
 class _$MinutelyTearOff {
   const _$MinutelyTearOff();
 
-  _Minutely call({required int dt, required int precipitation}) {
+  _Minutely call({required int dt, required double precipitation}) {
     return _Minutely(
       dt: dt,
       precipitation: precipitation,
@@ -2130,7 +2416,7 @@ const $Minutely = _$MinutelyTearOff();
 /// @nodoc
 mixin _$Minutely {
   int get dt => throw _privateConstructorUsedError;
-  int get precipitation => throw _privateConstructorUsedError;
+  double get precipitation => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2142,7 +2428,7 @@ mixin _$Minutely {
 abstract class $MinutelyCopyWith<$Res> {
   factory $MinutelyCopyWith(Minutely value, $Res Function(Minutely) then) =
       _$MinutelyCopyWithImpl<$Res>;
-  $Res call({int dt, int precipitation});
+  $Res call({int dt, double precipitation});
 }
 
 /// @nodoc
@@ -2166,7 +2452,7 @@ class _$MinutelyCopyWithImpl<$Res> implements $MinutelyCopyWith<$Res> {
       precipitation: precipitation == freezed
           ? _value.precipitation
           : precipitation // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -2176,7 +2462,7 @@ abstract class _$MinutelyCopyWith<$Res> implements $MinutelyCopyWith<$Res> {
   factory _$MinutelyCopyWith(_Minutely value, $Res Function(_Minutely) then) =
       __$MinutelyCopyWithImpl<$Res>;
   @override
-  $Res call({int dt, int precipitation});
+  $Res call({int dt, double precipitation});
 }
 
 /// @nodoc
@@ -2201,7 +2487,7 @@ class __$MinutelyCopyWithImpl<$Res> extends _$MinutelyCopyWithImpl<$Res>
       precipitation: precipitation == freezed
           ? _value.precipitation
           : precipitation // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -2217,7 +2503,7 @@ class _$_Minutely implements _Minutely {
   @override
   final int dt;
   @override
-  final int precipitation;
+  final double precipitation;
 
   @override
   String toString() {
@@ -2252,7 +2538,7 @@ class _$_Minutely implements _Minutely {
 }
 
 abstract class _Minutely implements Minutely {
-  const factory _Minutely({required int dt, required int precipitation}) =
+  const factory _Minutely({required int dt, required double precipitation}) =
       _$_Minutely;
 
   factory _Minutely.fromJson(Map<String, dynamic> json) = _$_Minutely.fromJson;
@@ -2260,7 +2546,7 @@ abstract class _Minutely implements Minutely {
   @override
   int get dt;
   @override
-  int get precipitation;
+  double get precipitation;
   @override
   @JsonKey(ignore: true)
   _$MinutelyCopyWith<_Minutely> get copyWith =>

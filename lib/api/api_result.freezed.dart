@@ -236,6 +236,8 @@ abstract class $FailureCopyWith<T, $Res> {
   factory $FailureCopyWith(Failure<T> value, $Res Function(Failure<T>) then) =
       _$FailureCopyWithImpl<T, $Res>;
   $Res call({NetworkExceptions error});
+
+  $NetworkExceptionsCopyWith<$Res> get error;
 }
 
 /// @nodoc
@@ -257,6 +259,13 @@ class _$FailureCopyWithImpl<T, $Res> extends _$ApiResultCopyWithImpl<T, $Res>
           : error // ignore: cast_nullable_to_non_nullable
               as NetworkExceptions,
     ));
+  }
+
+  @override
+  $NetworkExceptionsCopyWith<$Res> get error {
+    return $NetworkExceptionsCopyWith<$Res>(_value.error, (value) {
+      return _then(_value.copyWith(error: value));
+    });
   }
 }
 

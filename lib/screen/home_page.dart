@@ -1,5 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:weatherly/controller/weather_controller.dart';
+import 'package:weatherly/bloc/weather_bloc.dart';
 import 'package:weatherly/gen/assets.gen.dart';
 import 'package:weatherly/util/barrel.dart';
 import 'package:weatherly/widget/atom/custom_widget.dart';
@@ -15,44 +16,42 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late WeatherController _weatherController;
+  final WeatherBloc _weatherbloc = WeatherBloc();
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback(
-      (_) {
-        _weatherController =
-            Provider.of<WeatherController>(context, listen: false);
-        _weatherController.getinitialData();
-      },
-    );
-
+    _weatherbloc.add(const WeatherEvent.getWeather());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WeatherController>(
-      builder: (context, weatherController, child) {
+    return BlocBuilder<WeatherBloc, WeatherState>(
+      bloc: _weatherbloc,
+      builder: (context, state) {
         return Scaffold(
-          appBar: customAppbar(),
-          body: Center(
-            child: weatherController.isLoading
-                ? SizedBox(
-                    width: 100,
-                    height: 100,
-                    child: LottieBuilder.asset(
-                      Assets.loading,
-                    ),
-                  )
-                : weatherController.weatherData == null
-                    ? Center(
-                        child: LottieBuilder.network(
-                          "https://assets4.lottiefiles.com/packages/lf20_lvuoopxx.json",
-                          width: 30.h,
-                        ),
-                      )
-                    : const HomepageWidgeList(),
+          appBar: customAppbar(_weatherbloc),
+          body: state.maybeWhen(
+            orElse: () => Center(
+              child: SizedBox(
+                height: 10.h,
+                child: LottieBuilder.asset(Assets.loading),
+              ),
+            ),
+            error: (message) => Center(
+              child: LottieBuilder.network(
+                  "https://assets10.lottiefiles.com/packages/lf20_ed9D2z.json"),
+            ),
+            loading: () => Center(
+              child: SizedBox(
+                height: 10.h,
+                child: LottieBuilder.asset(Assets.loading),
+              ),
+            ),
+            loaded: (weather, cityData) => HomepageWidgeList(
+              oneCallWeather: weather,
+              cityDataModel: cityData,
+            ),
           ),
         );
       },

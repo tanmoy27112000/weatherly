@@ -30,28 +30,24 @@ class ApiHelper {
     );
   }
 
-  Future<ApiResult> getRequest(
+  Future<Map<String, dynamic>> getRequest(
     String path, {
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
   }) async {
-    Response<dynamic> result;
     try {
-      result = await Future.delayed(const Duration(seconds: 2))
-          .then((value) => _dio.get(
-                path,
-                queryParameters: queryParameters,
-                cancelToken: cancelToken,
-                onReceiveProgress: onReceiveProgress,
-                options: options,
-              ));
-      return ApiResult.success(data: result.data);
-    } catch (e) {
-      return ApiResult.failure(
-        error: NetworkExceptions.getDioException(e),
+      Response result = await _dio.get(
+        path,
+        queryParameters: queryParameters,
+        cancelToken: cancelToken,
+        onReceiveProgress: onReceiveProgress,
+        options: options,
       );
+      return result.data;
+    } catch (e) {
+      throw const NetworkExceptions.defaultError("error");
     }
   }
 
