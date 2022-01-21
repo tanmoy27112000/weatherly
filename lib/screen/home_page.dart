@@ -45,7 +45,14 @@ class _HomePageState extends State<HomePage> {
                       Assets.loading,
                     ),
                   )
-                : const HomepageWidgeList(),
+                : weatherController.weatherData == null
+                    ? Center(
+                        child: LottieBuilder.network(
+                          "https://assets4.lottiefiles.com/packages/lf20_lvuoopxx.json",
+                          width: 30.h,
+                        ),
+                      )
+                    : const HomepageWidgeList(),
           ),
         );
       },

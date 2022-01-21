@@ -10,13 +10,13 @@ import 'package:weatherly/service/weather_service.dart';
 
 class WeatherController extends ChangeNotifier {
   bool isLoading = true;
-  late OneCallWeather _weatherData;
+  late OneCallWeather? _weatherData;
 
-  late CityDataModel _cityData;
+  late CityDataModel? _cityData;
   WeatherService weatherService = GetIt.I.get<WeatherService>();
 
-  OneCallWeather get weatherData => _weatherData;
-  CityDataModel get cityData => _cityData;
+  OneCallWeather? get weatherData => _weatherData;
+  CityDataModel? get cityData => _cityData;
 
   startLoading() {
     isLoading = true;

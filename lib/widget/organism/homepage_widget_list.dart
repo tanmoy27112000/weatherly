@@ -1,7 +1,9 @@
 import 'package:lottie/lottie.dart';
 import 'package:weatherly/controller/weather_controller.dart';
+import 'package:weatherly/model/weather_data_model.dart';
 import 'package:weatherly/util/barrel.dart';
 import 'package:weatherly/util/icon_data.dart';
+import 'package:weatherly/widget/atom/weather_graph.dart';
 import 'package:weatherly/widget/molecule/value_tile.dart';
 import 'package:weatherly/widget/organism/forecarst_row_widget.dart';
 
@@ -25,13 +27,13 @@ class HomepageWidgeList extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: LottieBuilder.asset(
                         getIconData(
-                            weatherController.cityData.weather.first.icon),
+                            weatherController.cityData!.weather.first.icon),
                       ),
                     )),
                 Padding(
                   padding: EdgeInsets.only(top: 1.h),
                   child: Text(
-                    weatherController.cityData.name.toUpperCase(),
+                    weatherController.cityData!.name.toUpperCase(),
                     style: const TextStyle(
                       fontSize: 25,
                       letterSpacing: 5,
@@ -42,11 +44,10 @@ class HomepageWidgeList extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: 2.h),
                   child: Text(
-                    weatherController.cityData.weather.first.description
-                        .toUpperCase(),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      letterSpacing: 1,
+                    "FEELS LIKE ${weatherController.cityData!.main.feels_like}° . ${weatherController.cityData!.weather.first.description.toUpperCase()}",
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      letterSpacing: 0,
                     ),
                   ),
                 ),
@@ -57,7 +58,7 @@ class HomepageWidgeList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     ValueTile(
-                        "max", '${weatherController.cityData.main.temp_max}°'),
+                        "max", '${weatherController.cityData!.main.temp_max}°'),
                     const Padding(
                       padding: EdgeInsets.only(left: 15, right: 15),
                       child: Center(
@@ -68,7 +69,7 @@ class HomepageWidgeList extends StatelessWidget {
                     ),
                     ValueTile(
                       "min",
-                      '${weatherController.cityData.main.temp_min}°',
+                      '${weatherController.cityData!.main.temp_min}°',
                     ),
                   ],
                 ),
@@ -85,7 +86,7 @@ class HomepageWidgeList extends StatelessWidget {
                   ),
                 ),
                 ForecastRowWidget(
-                  weathers: weatherController.weatherData.hourly
+                  weathers: weatherController.weatherData!.hourly
                       .map(
                         (e) => ForecastDataModel(
                           date: e.dt,
@@ -105,7 +106,7 @@ class HomepageWidgeList extends StatelessWidget {
                   ),
                 ),
                 ForecastRowWidget(
-                  weathers: weatherController.weatherData.daily
+                  weathers: weatherController.weatherData!.daily
                       .map(
                         (e) => ForecastDataModel(
                           date: e.dt,
@@ -114,6 +115,40 @@ class HomepageWidgeList extends StatelessWidget {
                         ),
                       )
                       .toList(),
+                ),
+                MultiLineWeatherGraph(
+                  data: <WeatherData>[
+                    ...weatherController.weatherData!.daily
+                        .sublist(
+                            0, weatherController.weatherData!.daily.length - 1)
+                        .map(
+                          (e) => WeatherData(
+                            DateFormatter.e(DateTime.fromMillisecondsSinceEpoch(
+                                e.dt * 1000)),
+                            e.temp.max - 273.15,
+                            value2: e.temp.min - 273.15,
+                          ),
+                        )
+                        .toList()
+                  ],
+                  title: "Daily temperature (MAX)",
+                ),
+                WeatherGraph(
+                  data: <WeatherData>[
+                    ...weatherController.weatherData!.hourly
+                        .sublist(
+                            0, weatherController.weatherData!.daily.length - 1)
+                        .map(
+                          (e) => WeatherData(
+                            DateFormatter.ha(
+                                DateTime.fromMillisecondsSinceEpoch(
+                                    e.dt * 1000)),
+                            e.temp - 273.15,
+                          ),
+                        )
+                        .toList()
+                  ],
+                  title: "Hourly temperature (MAX)",
                 ),
               ],
             ),

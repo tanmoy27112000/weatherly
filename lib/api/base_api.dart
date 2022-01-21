@@ -1,6 +1,6 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:weatherly/api/api_result.dart';
+import 'package:weatherly/api/network_exceptions.dart';
 
 class ApiHelper {
   final String baseUrl;
@@ -13,8 +13,8 @@ class ApiHelper {
   setUpOptions() async {
     final baseOptions = BaseOptions(
       baseUrl: baseUrl,
-      connectTimeout: 15000,
-      receiveTimeout: 15000,
+      connectTimeout: 1500,
+      receiveTimeout: 1500,
     );
     _dio = Dio(baseOptions);
 
@@ -30,7 +30,7 @@ class ApiHelper {
     );
   }
 
-  Future<dynamic> getRequest(
+  Future<ApiResult> getRequest(
     String path, {
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -47,9 +47,11 @@ class ApiHelper {
                 onReceiveProgress: onReceiveProgress,
                 options: options,
               ));
-      return result.data;
+      return ApiResult.success(data: result.data);
     } catch (e) {
-      return Exception(e);
+      return ApiResult.failure(
+        error: NetworkExceptions.getDioException(e),
+      );
     }
   }
 
@@ -72,100 +74,11 @@ class ApiHelper {
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
-      return response;
-    } on SocketException catch (e) {
-      throw SocketException(e.toString());
-    } on FormatException catch (_) {
-      throw FormatException("Unable to process the data");
+      return ApiResult.success(data: response.data);
     } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<dynamic> patchRequest(
-    String path, {
-    data,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-    CancelToken? cancelToken,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-  }) async {
-    try {
-      final result = await _dio.patch(
-        path,
-        data: data,
-        options: options,
-        queryParameters: queryParameters,
-        cancelToken: cancelToken,
-        onSendProgress: onSendProgress,
-        onReceiveProgress: onReceiveProgress,
+      return ApiResult.failure(
+        error: NetworkExceptions.getDioException(e),
       );
-
-      return result;
-    } on SocketException catch (e) {
-      throw SocketException(e.toString());
-    } on FormatException catch (_) {
-      throw const FormatException("Unable to process the data");
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<dynamic> putRequest(
-    String path, {
-    data,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-    CancelToken? cancelToken,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-  }) async {
-    try {
-      final result = await _dio.put(
-        path,
-        data: data,
-        options: options,
-        queryParameters: queryParameters,
-        cancelToken: cancelToken,
-        onSendProgress: onSendProgress,
-        onReceiveProgress: onReceiveProgress,
-      );
-
-      return result;
-    } on SocketException catch (e) {
-      throw SocketException(e.toString());
-    } on FormatException catch (_) {
-      throw const FormatException("Unable to process the data");
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<dynamic> deleteRequest(
-    String path,
-    context, {
-    data,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-    CancelToken? cancelToken,
-  }) async {
-    try {
-      final result = await _dio.delete(
-        path,
-        data: data,
-        options: options,
-        queryParameters: queryParameters,
-        cancelToken: cancelToken,
-      );
-
-      return result;
-    } on SocketException catch (e) {
-      throw SocketException(e.toString());
-    } on FormatException catch (_) {
-      throw const FormatException("Unable to process the data");
-    } catch (e) {
-      rethrow;
     }
   }
 }
