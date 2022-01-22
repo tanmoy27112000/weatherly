@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:weatherly/api/api_result.dart';
 import 'package:weatherly/api/base_api.dart';
 import 'package:weatherly/api/network_exceptions.dart';
+import 'package:weatherly/global/constant.dart';
 import 'package:weatherly/model/city_data_model.dart';
 import 'package:weatherly/model/one_call_weather.dart';
 
@@ -52,8 +53,8 @@ class WeatherService {
       return await GetIt.I.get<LocationService>().checkPermission()
           ? getCurrentLocationData()
           : getWeatherData(
-              latitude: 37.7749,
-              longitude: 122.4194,
+              latitude: KConstant.latitude,
+              longitude: KConstant.longitude,
             );
     } catch (e) {
       rethrow;
@@ -72,8 +73,8 @@ class WeatherService {
         );
       } else {
         return getCityDataFromLocation(
-          latitude: 37.7749,
-          longitude: 122.4194,
+          latitude: KConstant.latitude,
+          longitude: KConstant.longitude,
         );
       }
     } catch (e) {

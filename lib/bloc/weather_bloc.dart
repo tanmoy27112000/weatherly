@@ -16,7 +16,7 @@ part 'weather_state.dart';
 
 //add equatable
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> with EquatableMixin {
-  WeatherBloc() : super(_Initial());
+  WeatherBloc() : super(const _Initial());
 
   late ApiResult<OneCallWeather> _weatherData;
   late ApiResult<CityDataModel> _cityData;
@@ -51,8 +51,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> with EquatableMixin {
       },
       getWeatherByLocation: () async* {
         yield const WeatherState.loading();
-        await GetIt.I.get<LocationService>().determinePosition();
-        add(const WeatherEvent.getWeather());
+        try {
+          await GetIt.I.get<LocationService>().determinePosition();
+          add(const WeatherEvent.getWeather());
+        } catch (e) {
+          add(const WeatherEvent.getWeather());
+        }
       },
     );
   }

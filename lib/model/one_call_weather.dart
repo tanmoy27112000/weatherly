@@ -60,9 +60,9 @@ abstract class Current with _$Current {
     required double uvi,
     required int clouds,
     required int visibility,
-    required double wind_speed,
-    required int wind_deg,
-    required double wind_gust,
+    double? wind_speed,
+    int? wind_deg,
+    double? wind_gust,
     required List<Weather> weather,
     double? pop,
   }) = _Current;

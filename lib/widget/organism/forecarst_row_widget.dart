@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weatherly/util/barrel.dart';
 import 'package:weatherly/util/icon_data.dart';
@@ -26,7 +25,7 @@ class ForecastRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 24.h,
+      height: 26.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,

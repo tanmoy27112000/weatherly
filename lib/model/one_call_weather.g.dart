@@ -70,9 +70,9 @@ _$_Current _$$_CurrentFromJson(Map<String, dynamic> json) => _$_Current(
       uvi: (json['uvi'] as num).toDouble(),
       clouds: json['clouds'] as int,
       visibility: json['visibility'] as int,
-      wind_speed: (json['wind_speed'] as num).toDouble(),
-      wind_deg: json['wind_deg'] as int,
-      wind_gust: (json['wind_gust'] as num).toDouble(),
+      wind_speed: (json['wind_speed'] as num?)?.toDouble(),
+      wind_deg: json['wind_deg'] as int?,
+      wind_gust: (json['wind_gust'] as num?)?.toDouble(),
       weather: (json['weather'] as List<dynamic>)
           .map((e) => Weather.fromJson(e as Map<String, dynamic>))
           .toList(),

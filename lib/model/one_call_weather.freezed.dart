@@ -1,6 +1,5 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'one_call_weather.dart';
@@ -649,9 +648,9 @@ class _$CurrentTearOff {
       required double uvi,
       required int clouds,
       required int visibility,
-      required double wind_speed,
-      required int wind_deg,
-      required double wind_gust,
+      double? wind_speed,
+      int? wind_deg,
+      double? wind_gust,
       required List<Weather> weather,
       double? pop}) {
     return _Current(
@@ -695,9 +694,9 @@ mixin _$Current {
   double get uvi => throw _privateConstructorUsedError;
   int get clouds => throw _privateConstructorUsedError;
   int get visibility => throw _privateConstructorUsedError;
-  double get wind_speed => throw _privateConstructorUsedError;
-  int get wind_deg => throw _privateConstructorUsedError;
-  double get wind_gust => throw _privateConstructorUsedError;
+  double? get wind_speed => throw _privateConstructorUsedError;
+  int? get wind_deg => throw _privateConstructorUsedError;
+  double? get wind_gust => throw _privateConstructorUsedError;
   List<Weather> get weather => throw _privateConstructorUsedError;
   double? get pop => throw _privateConstructorUsedError;
 
@@ -722,9 +721,9 @@ abstract class $CurrentCopyWith<$Res> {
       double uvi,
       int clouds,
       int visibility,
-      double wind_speed,
-      int wind_deg,
-      double wind_gust,
+      double? wind_speed,
+      int? wind_deg,
+      double? wind_gust,
       List<Weather> weather,
       double? pop});
 }
@@ -804,15 +803,15 @@ class _$CurrentCopyWithImpl<$Res> implements $CurrentCopyWith<$Res> {
       wind_speed: wind_speed == freezed
           ? _value.wind_speed
           : wind_speed // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       wind_deg: wind_deg == freezed
           ? _value.wind_deg
           : wind_deg // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       wind_gust: wind_gust == freezed
           ? _value.wind_gust
           : wind_gust // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       weather: weather == freezed
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
@@ -842,9 +841,9 @@ abstract class _$CurrentCopyWith<$Res> implements $CurrentCopyWith<$Res> {
       double uvi,
       int clouds,
       int visibility,
-      double wind_speed,
-      int wind_deg,
-      double wind_gust,
+      double? wind_speed,
+      int? wind_deg,
+      double? wind_gust,
       List<Weather> weather,
       double? pop});
 }
@@ -925,15 +924,15 @@ class __$CurrentCopyWithImpl<$Res> extends _$CurrentCopyWithImpl<$Res>
       wind_speed: wind_speed == freezed
           ? _value.wind_speed
           : wind_speed // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       wind_deg: wind_deg == freezed
           ? _value.wind_deg
           : wind_deg // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       wind_gust: wind_gust == freezed
           ? _value.wind_gust
           : wind_gust // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       weather: weather == freezed
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
@@ -961,9 +960,9 @@ class _$_Current implements _Current {
       required this.uvi,
       required this.clouds,
       required this.visibility,
-      required this.wind_speed,
-      required this.wind_deg,
-      required this.wind_gust,
+      this.wind_speed,
+      this.wind_deg,
+      this.wind_gust,
       required this.weather,
       this.pop});
 
@@ -993,11 +992,11 @@ class _$_Current implements _Current {
   @override
   final int visibility;
   @override
-  final double wind_speed;
+  final double? wind_speed;
   @override
-  final int wind_deg;
+  final int? wind_deg;
   @override
-  final double wind_gust;
+  final double? wind_gust;
   @override
   final List<Weather> weather;
   @override
@@ -1078,9 +1077,9 @@ abstract class _Current implements Current {
       required double uvi,
       required int clouds,
       required int visibility,
-      required double wind_speed,
-      required int wind_deg,
-      required double wind_gust,
+      double? wind_speed,
+      int? wind_deg,
+      double? wind_gust,
       required List<Weather> weather,
       double? pop}) = _$_Current;
 
@@ -1109,11 +1108,11 @@ abstract class _Current implements Current {
   @override
   int get visibility;
   @override
-  double get wind_speed;
+  double? get wind_speed;
   @override
-  int get wind_deg;
+  int? get wind_deg;
   @override
-  double get wind_gust;
+  double? get wind_gust;
   @override
   List<Weather> get weather;
   @override
