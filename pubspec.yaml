@@ -27,9 +27,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  bloc:
+  bloc: null
+  bloc_test:
   cupertino_icons: ^1.0.2
   dio: ^4.0.4
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
   flutter_bloc: 7.1.0
@@ -40,7 +42,6 @@ dependencies:
   google_fonts: ^2.2.0
   intl: ^0.17.0
   lottie: ^1.2.1
-
   sizer: ^2.0.15
   syncfusion_flutter_charts: ^19.4.43
   weather_icons: ^3.0.0

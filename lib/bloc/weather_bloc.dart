@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:weatherly/api/api_result.dart';
@@ -13,7 +14,8 @@ part 'weather_bloc.freezed.dart';
 part 'weather_event.dart';
 part 'weather_state.dart';
 
-class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
+//add equatable
+class WeatherBloc extends Bloc<WeatherEvent, WeatherState> with EquatableMixin {
   WeatherBloc() : super(_Initial());
 
   late ApiResult<OneCallWeather> _weatherData;
@@ -54,4 +56,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       },
     );
   }
+
+  @override
+  List<Object?> get props => [_cityData, _weatherData];
 }
